@@ -49,7 +49,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/akkc01/axion-intelligence-plateform.git
+        repoURL: https://github.com/akkc01/gitops-with-argocd.git
         targetRevision: main
         path: '{{chartPath}}'
 
