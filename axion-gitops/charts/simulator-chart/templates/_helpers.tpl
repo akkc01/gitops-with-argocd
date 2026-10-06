@@ -24,7 +24,7 @@ Deployment name
 Ingestion service name
 */}}
 {{- define "axion.ingestionServiceName" -}}
-{{ include "axionsml.name" . }}-{{ .Release.Name }}-ingestion-svc
+axion-ingestion-{{ .Values.environment }}-svc
 {{- end }}
 
 

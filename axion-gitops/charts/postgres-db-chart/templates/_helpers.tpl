@@ -25,9 +25,8 @@ PostgreSQL Deployment name
 PostgreSQL Service name
 */}}
 {{- define "postgres.serviceName" -}}
-{{ include "pgres.name" . }}-{{ .Release.Name }}-postgres-svc
+{{ include "pgres.name" . }}-{{ .Release.Name }}-svc
 {{- end }}
-
 
 {{/*
 PostgreSQL Secret name

@@ -51,7 +51,7 @@ Ingress name
 PostgreSQL Service name
 */}}
 {{- define "postgres.serviceName" -}}
-{{ include "telemetry.name" . }}-{{ .Release.Name }}-postgres-svc
+axion-postgres-db-{{ .Values.environment }}-svc
 {{- end }}
 
 

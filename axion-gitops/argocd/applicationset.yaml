@@ -24,16 +24,16 @@ spec:
           # Microservice generator
           - list:
               elements:
-                - app: axion-ui
+                - app: ui
                   chartPath: axion-gitops/charts/ui-chart
 
-                - app: axion-telemetry
+                - app: telemetry
                   chartPath: axion-gitops/charts/telemetry-chart
 
-                - app: axion-simulator
+                - app: simulator
                   chartPath: axion-gitops/charts/simulator-chart
 
-                - app: axion-ingestion
+                - app: ingestion
                   chartPath: axion-gitops/charts/ingestion-chart
 
                 - app: postgres-db
@@ -56,6 +56,9 @@ spec:
         helm:
           valueFiles:
             - values.yaml
+
+          values: |
+            environment: '{{env}}'
 
       destination:
         server: https://kubernetes.default.svc

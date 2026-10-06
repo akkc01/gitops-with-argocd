@@ -42,7 +42,7 @@ axion
 Ingestion service name
 */}}
 {{- define "ingestion.ServiceName" -}}
-{{ include "axiontelemetry.name" . }}-{{ .Release.Name }}-ingestion-svc
+{{ include "axiontelemetry.name" . }}-{{ .Release.Name }}-svc
 {{- end }}
 
 
@@ -51,7 +51,7 @@ Ingestion service name
 PostgreSQL Service name
 */}}
 {{- define "postgres.serviceName" -}}
-{{ include "axiontelemetry.name" . }}-{{ .Release.Name }}-postgres-svc
+axion-postgres-db-{{ .Values.environment }}-svc
 {{- end }}
 
 
@@ -61,3 +61,4 @@ Database connection string
 {{- define "ingestion.databaseUrl" -}}
 postgresql://{{ .Values.database.postgresUser }}:{{ .Values.database.postgresPassword }}@{{ include "postgres.serviceName" . }}:{{ .Values.database.port }}/{{ .Values.database.postgresDbName }}
 {{- end }}
+

@@ -73,3 +73,5 @@ ingress:
 
 # telemetry:
 #   databaseUrl: "postgresql://jarvis:jarvis12345@dev-axion-postgres-svc:5432/jarvis-db"
+
+environment: ""

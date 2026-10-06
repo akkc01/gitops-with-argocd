@@ -64,3 +64,5 @@ ingress:
 
 # database:
 #   url: "postgresql://jarvis:jarvis123@dev-axion-postgres-svc:5432/jarvis"
+
+environment: ""
