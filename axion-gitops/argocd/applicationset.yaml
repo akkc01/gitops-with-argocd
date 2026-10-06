@@ -1,0 +1,70 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+
+metadata:
+  name: axion-application-set
+  namespace: argocd
+
+spec:
+  generators:
+    - matrix:
+        generators:
+          # Environment generator
+          - list:
+              elements:
+                - env: dev
+                  namespace: axion-dev
+
+                - env: qa
+                  namespace: axion-qa
+
+                - env: prod
+                  namespace: axion-prod
+
+          # Microservice generator
+          - list:
+              elements:
+                - app: axion-ui
+                  chartPath: axion-gitops/charts/ui-chart
+
+                - app: axion-telemetry
+                  chartPath: axion-gitops/charts/telemetry-chart
+
+                - app: axion-simulator
+                  chartPath: axion-gitops/charts/simulator-chart
+
+                - app: axion-ingestion
+                  chartPath: axion-gitops/charts/ingestion-chart
+
+                - app: postgres-db
+                  chartPath: axion-gitops/charts/postgres-db-chart
+                
+                - app: pgadmin
+                  chartPath: axion-gitops/charts/pgadmin-chart
+
+
+  template:
+    metadata:
+      name: '{{app}}-{{env}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/akkc01/axion-intelligence-plateform.git
+        targetRevision: main
+        path: '{{chartPath}}'
+
+        helm:
+          valueFiles:
+            - values.yaml
+
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}'
+
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
+        syncOptions:
+          - CreateNamespace=true
